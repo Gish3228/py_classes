@@ -1,6 +1,25 @@
-#include "integer.h"
+#include "float.h"
 
-Integer::Integer(int value): m_value(value){}
+
+Integer::Integer(const int& value): m_value(value){}
+
+
+Integer::Integer(const double& value): m_value(static_cast<int>(value)){};
+
+
+Integer::Integer(const Float& value): m_value(static_cast<int>(value.get())){};
+
+
+int Integer::get() const
+{
+    return m_value;
+}
+
+
+std::string Integer::type() const
+{
+    return "Integer";
+}
 
 
 bool Integer::operator==(const Integer &other) const
@@ -9,27 +28,9 @@ bool Integer::operator==(const Integer &other) const
 }
 
 
-bool Integer::operator>(const Integer &other) const
+bool Integer::operator!=(const Integer &other) const
 {
-    return m_value > other.m_value;
-}
-
-
-bool Integer::operator<(const Integer &other) const
-{
-    return m_value < other.m_value;
-}
-
-
-bool Integer::operator>=(const Integer &other) const
-{
-    return m_value >= other.m_value;
-}
-
-
-bool Integer::operator<=(const Integer &other) const
-{
-    return m_value <= other.m_value;
+    return !(*this == other);
 }
 
 
@@ -83,6 +84,12 @@ Integer& Integer::operator*=(const Integer &other)
 {
     m_value *= other.m_value;
     return *this;
+}
+
+
+Integer Integer::abs() const
+{
+    return Integer(std::abs(m_value));
 }
 
 

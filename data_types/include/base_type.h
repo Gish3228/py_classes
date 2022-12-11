@@ -8,6 +8,7 @@ class BaseType
 public:
     virtual ~BaseType(){};
     virtual std::ostream& print(std::ostream& out) const = 0;
+    virtual std::string type() const = 0;
     friend std::ostream& operator<<(std::ostream& out, const BaseType& output);
 };
 
